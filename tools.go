@@ -41,3 +41,34 @@ func InArray(arr []string, str string) (ok bool) {
 
 	return
 }
+
+// HasArray - проверяем содержитат ли массивы пересечение
+func HasArray(arr1, arr2 []string) (ok bool) {
+	if len(arr1) > len(arr2) {
+		h := map[string]bool{}
+		for _, a := range arr2 {
+			h[a] = true
+		}
+
+		for _, a := range arr1 {
+			if h[a] {
+				ok = true
+				break
+			}
+		}
+	} else {
+		h := map[string]bool{}
+		for _, a := range arr1 {
+			h[a] = true
+		}
+
+		for _, a := range arr2 {
+			if h[a] {
+				ok = true
+				break
+			}
+		}
+	}
+
+	return
+}
