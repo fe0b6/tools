@@ -85,14 +85,17 @@ func AppendSet(m, s string) string {
 	nm := strings.TrimLeft(strings.TrimRight(m, "}"), "{")
 
 	arr := strings.Split(nm, ",")
+	narr := []string{}
 	for _, v := range arr {
 		if v == s {
 			return m
+		} else if v != "" {
+			narr = append(narr, v)
 		}
 	}
 
-	arr = append(arr, s)
-	m = strings.Join(arr, ",")
+	narr = append(narr, s)
+	m = strings.Join(narr, ",")
 
 	return "{" + m + "}"
 }
