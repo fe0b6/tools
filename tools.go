@@ -1,5 +1,7 @@
 package tools
 
+import "strings"
+
 // ChunkSliceString - Разбиваем массив строк на несколько
 func ChunkSliceString(arr []string, size int) (ans [][]string) {
 	msize := len(arr) / size
@@ -71,4 +73,9 @@ func HasArray(arr1, arr2 []string) (ok bool) {
 	}
 
 	return
+}
+
+// GetPlaceholders - Возвращает строку placeholders нужной длины
+func GetPlaceholders(l int) string {
+	return strings.TrimRight(strings.Repeat("?,", l), ",")
 }
