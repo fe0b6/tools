@@ -86,7 +86,7 @@ func AppendSet(m, s string) string {
 
 	arr := strings.Split(nm, ",")
 	for _, v := range arr {
-		if v == nm {
+		if v == s {
 			return m
 		}
 	}
