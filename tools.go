@@ -79,3 +79,20 @@ func HasArray(arr1, arr2 []string) (ok bool) {
 func GetPlaceholders(l int) string {
 	return strings.TrimRight(strings.Repeat("?,", l), ",")
 }
+
+// AppendSet - добавляем элемент в массив
+func AppendSet(m, s string) string {
+	nm := strings.TrimLeft(strings.TrimRight(m, "}"), "{")
+
+	arr := strings.Split(nm, ",")
+	for _, v := range arr {
+		if v == nm {
+			return m
+		}
+	}
+
+	arr = append(arr, s)
+	m = strings.Join(arr, ",")
+
+	return "{" + m + "}"
+}
