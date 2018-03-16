@@ -1,6 +1,8 @@
 package tools
 
-import "strings"
+import (
+	"strings"
+)
 
 // ChunkSliceString - Разбиваем массив строк на несколько
 func ChunkSliceString(arr []string, size int) (ans [][]string) {
@@ -87,6 +89,7 @@ func AppendSet(m, s string) string {
 	arr := strings.Split(nm, ",")
 	narr := []string{}
 	for _, v := range arr {
+		v = strings.Trim(v, `"`)
 		if v == s {
 			return m
 		} else if v != "" {
