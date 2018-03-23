@@ -106,6 +106,7 @@ func AppendSet(m, s string) string {
 
 // FloatTrunc - обрезаем float64 до нужной длины
 func FloatTrunc(num, precision float64) float64 {
+	num *= 100
 	output := math.Pow(10, precision)
 	return float64(int(num+math.Copysign(0.5, num))) / output
 }
