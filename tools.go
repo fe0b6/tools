@@ -1,6 +1,7 @@
 package tools
 
 import (
+	"math"
 	"strings"
 )
 
@@ -101,4 +102,10 @@ func AppendSet(m, s string) string {
 	m = strings.Join(narr, ",")
 
 	return "{" + m + "}"
+}
+
+// FloatTrunc - обрезаем float64 до нужной длины
+func FloatTrunc(num, precision float64) float64 {
+	output := math.Pow(10, precision)
+	return float64(int(num+math.Copysign(0.5, num))) / output
 }
