@@ -1,9 +1,21 @@
 package tools
 
 import (
+	"log"
 	"math"
+	"os/exec"
+	"regexp"
+	"strconv"
 	"strings"
 )
+
+var (
+	processPidReg *regexp.Regexp
+)
+
+func init() {
+	processPidReg = regexp.MustCompile("^\\S+\\s+(\\d+)")
+}
 
 // ChunkSliceString - Разбиваем массив строк на несколько
 func ChunkSliceString(arr []string, size int) (ans [][]string) {
@@ -131,4 +143,36 @@ func CheckSet(m, s string) bool {
 func FloatTrunc(num, precision float64) float64 {
 	output := math.Pow(10, precision)
 	return float64(int(num*output+math.Copysign(0.5, num*output))) / output
+}
+
+// GetProcessID - получаем id процесса
+func GetProcessID(qs []string) (pid int) {
+	cmd := exec.Command("ps", "axuw")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Println("[error]", err)
+		return
+	}
+
+	for _, str := range strings.Split(string(out), "\n") {
+		var ok int
+		for _, q := range qs {
+			if strings.Contains(strings.ToLower(str), strings.ToLower(q)) {
+				ok++
+			}
+		}
+
+		if ok != len(qs) {
+			continue
+		}
+
+		found := processPidReg.FindStringSubmatch(str)
+		if len(found) > 0 {
+			p, _ := strconv.ParseInt(found[1], 10, 64)
+			pid = int(p)
+			return
+		}
+	}
+
+	return
 }
