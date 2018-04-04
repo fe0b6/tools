@@ -85,9 +85,8 @@ func GetPlaceholders(l int) string {
 
 // AppendSet - добавляем элемент в массив
 func AppendSet(m, s string) string {
-	nm := strings.TrimLeft(strings.TrimRight(m, "}"), "{")
 
-	arr := strings.Split(nm, ",")
+	arr := strings.Split(m, ",")
 	narr := []string{}
 	for _, v := range arr {
 		v = strings.Trim(v, `"`)
@@ -101,14 +100,13 @@ func AppendSet(m, s string) string {
 	narr = append(narr, s)
 	m = strings.Join(narr, ",")
 
-	return "{" + m + "}"
+	return m
 }
 
 // RemoveSet - удаляем элемент в массив
 func RemoveSet(m, s string) string {
-	nm := strings.TrimLeft(strings.TrimRight(m, "}"), "{")
 
-	arr := strings.Split(nm, ",")
+	arr := strings.Split(m, ",")
 	narr := []string{}
 	for _, v := range arr {
 		v = strings.Trim(v, `"`)
@@ -121,7 +119,7 @@ func RemoveSet(m, s string) string {
 
 	m = strings.Join(narr, ",")
 
-	return "{" + m + "}"
+	return m
 }
 
 // FloatTrunc - обрезаем float64 до нужной длины
