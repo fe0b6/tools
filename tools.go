@@ -104,6 +104,26 @@ func AppendSet(m, s string) string {
 	return "{" + m + "}"
 }
 
+// RemoveSet - удаляем элемент в массив
+func RemoveSet(m, s string) string {
+	nm := strings.TrimLeft(strings.TrimRight(m, "}"), "{")
+
+	arr := strings.Split(nm, ",")
+	narr := []string{}
+	for _, v := range arr {
+		v = strings.Trim(v, `"`)
+		if v == s {
+			continue
+		} else if v != "" {
+			narr = append(narr, v)
+		}
+	}
+
+	m = strings.Join(narr, ",")
+
+	return "{" + m + "}"
+}
+
 // FloatTrunc - обрезаем float64 до нужной длины
 func FloatTrunc(num, precision float64) float64 {
 	output := math.Pow(10, precision)
