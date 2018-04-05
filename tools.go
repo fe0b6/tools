@@ -98,7 +98,7 @@ func GetPlaceholders(l int) string {
 // AppendSet - добавляем элемент в массив
 func AppendSet(m []string, s string) []string {
 
-	h := map[string]bool{}
+	h := map[string]bool{s: true}
 	for _, v := range m {
 		if v == s {
 			return m
