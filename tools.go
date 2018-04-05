@@ -96,27 +96,29 @@ func GetPlaceholders(l int) string {
 }
 
 // AppendSet - добавляем элемент в массив
-func AppendSet(m, s string) string {
+func AppendSet(m []string, s string) []string {
 
-	narr := []string{}
-	for _, v := range strings.Split(m, ",") {
+	h := map[string]bool{}
+	for _, v := range m {
 		if v == s {
 			return m
-		} else if v != "" {
-			narr = append(narr, v)
 		}
+		h[v] = true
 	}
 
-	narr = append(narr, s)
+	narr := []string{}
+	for k := range h {
+		narr = append(narr, k)
+	}
 
-	return strings.Join(narr, ",")
+	return narr
 }
 
 // RemoveSet - удаляем элемент в массив
-func RemoveSet(m, s string) string {
+func RemoveSet(m []string, s string) []string {
 
 	narr := []string{}
-	for _, v := range strings.Split(m, ",") {
+	for _, v := range m {
 		if v == s {
 			continue
 		} else if v != "" {
@@ -124,19 +126,12 @@ func RemoveSet(m, s string) string {
 		}
 	}
 
-	return strings.Join(narr, ",")
+	return narr
 }
 
 // CheckSet - проверяем есть ли элемент в массиве
-func CheckSet(m, s string) bool {
-
-	for _, v := range strings.Split(m, ",") {
-		if v == s {
-			return true
-		}
-	}
-
-	return false
+func CheckSet(m []string, s string) bool {
+	return InArray(m, s)
 }
 
 // FloatTrunc - обрезаем float64 до нужной длины
