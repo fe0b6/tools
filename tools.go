@@ -171,3 +171,56 @@ func GetProcessID(qs []string) (pid int) {
 
 	return
 }
+
+// GetTimezones - получаем список временых зон
+func GetTimezones() (tz []Timezone) {
+
+	tz = []Timezone{
+		Timezone{Name: "UTC−12:00 — Линия перемены даты", Value: -12},
+		Timezone{Name: "UTC−11:00 — Американское Самоа", Value: -11},
+		Timezone{Name: "UTC−10:00 — Гавайи", Value: -10},
+		Timezone{Name: "UTC−09:00 — Аляска", Value: -9},
+		Timezone{Name: "UTC−08:00 — Тихоокеанское время (США и Канада)", Value: -8},
+		Timezone{Name: "UTC−07:00 — Аризона, Чиуауа, Ла-Пас, Масатлан", Value: -7},
+		Timezone{Name: "UTC−06:00 — Центральное время (США и Канада)", Value: -6},
+		Timezone{Name: "UTC−05:00 — Восточное время (США и Канада)", Value: -5},
+		Timezone{Name: "UTC−04:30 — Каракас", Value: -4.5},
+		Timezone{Name: "UTC−04:00 — Атлантическое время (Канада)", Value: -4},
+		Timezone{Name: "UTC−03:30 — Ньюфаундленд", Value: -3.5},
+		Timezone{Name: "UTC−03:00 — Бразилиа, Буэнос-Айрес, Джорджтаун", Value: -3},
+		Timezone{Name: "UTC−02:00 — Среднеатлантическое время", Value: -2},
+		Timezone{Name: "UTC−01:00 — Азорские острова, Кабо-Верде", Value: -1},
+		Timezone{Name: "UTC+00:00 — Западноевропейское время (Лондон)", Value: 0},
+		Timezone{Name: "UTC+01:00 — Центральноевропейское время (Берлин, Париж)", Value: 1},
+		Timezone{Name: "UTC+02:00 — Киев, Калининград, Египет, Израиль", Value: 2},
+		Timezone{Name: "UTC+03:00 — Московское время", Value: 3},
+		Timezone{Name: "UTC+03:30 — Тегеранское время", Value: 3.5},
+		Timezone{Name: "UTC+04:00 — Самарское время", Value: 4},
+		Timezone{Name: "UTC+04:30 — Афганистан", Value: 4.5},
+		Timezone{Name: "UTC+05:00 — Екатеринбургское время", Value: 5},
+		Timezone{Name: "UTC+05:30 — Индия, Шри-Ланка", Value: 5.5},
+		Timezone{Name: "UTC+05:45 — Непал", Value: 5.75},
+		Timezone{Name: "UTC+06:00 — Омское время, Новосибирск", Value: 6},
+		Timezone{Name: "UTC+06:30 — Мьянма", Value: 6.5},
+		Timezone{Name: "UTC+07:00 — Красноярское время", Value: 7},
+		Timezone{Name: "UTC+08:00 — Иркутское время, Гонконг, Китай", Value: 8},
+		Timezone{Name: "UTC+08:45 — пять городов Австралии", Value: 8.75},
+		Timezone{Name: "UTC+09:00 — Якутское время, Корея, Япония", Value: 9},
+		Timezone{Name: "UTC+09:30 — Центральноавстралийское время (Аделаида, Дарвин)", Value: 9.5},
+		Timezone{Name: "UTC+10:00 — Владивостокское время", Value: 10},
+		Timezone{Name: "UTC+10:30 — часть Австралии", Value: 10.5},
+		Timezone{Name: "UTC+11:00 — Среднеколымское время", Value: 11},
+		Timezone{Name: "UTC+11:30 — остров Норфолк (Австралия)", Value: 11.5},
+		Timezone{Name: "UTC+12:00 — Камчатское время, Новая Зеландия", Value: 12},
+		Timezone{Name: "UTC+12:45 — архипелаг Чатем (Новая Зеландия)", Value: 12.75},
+		Timezone{Name: "UTC+13:00 — Самоа, Тонга", Value: 13},
+		Timezone{Name: "UTC+13:45 — летнее время на архипелаге Чатем (Новая Зеландия)", Value: 13.75},
+		Timezone{Name: "UTC+14:00 — Острова Лайн", Value: 14},
+	}
+
+	for i := range tz {
+		tz[i].Value *= 60
+	}
+
+	return
+}
