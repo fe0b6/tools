@@ -1,6 +1,8 @@
 package tools
 
 import (
+	"bytes"
+	"encoding/gob"
 	"log"
 	"math"
 	"os/exec"
@@ -223,4 +225,20 @@ func GetTimezones() (tz []Timezone) {
 	}
 
 	return
+}
+
+// FromGob - преобразуем gob в объект
+func FromGob(i interface{}, b []byte) {
+	var s bytes.Buffer
+	s.Write(b)
+	gr := gob.NewDecoder(&s)
+	gr.Decode(i)
+}
+
+// ToGob - преобразуем объект в gob
+func ToGob(i interface{}) []byte {
+	var s bytes.Buffer
+	gr := gob.NewEncoder(&s)
+	gr.Encode(i)
+	return s.Bytes()
 }
