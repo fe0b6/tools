@@ -3,6 +3,7 @@ package tools
 import (
 	"bytes"
 	"encoding/gob"
+	"encoding/json"
 	"log"
 	"math"
 	"os/exec"
@@ -241,4 +242,15 @@ func ToGob(i interface{}) []byte {
 	gr := gob.NewEncoder(&s)
 	gr.Encode(i)
 	return s.Bytes()
+}
+
+// ToJSON - преобразуем объект в json
+func ToJSON(i interface{}) (b []byte) {
+	b, err := json.Marshal(i)
+	if err != nil {
+		log.Println("[error]", err)
+		return
+	}
+
+	return
 }
