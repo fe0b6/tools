@@ -314,5 +314,6 @@ func GetMonthName(m int) string {
 		return "Декабрь"
 	}
 
-	return ""
+	// 0 тоже декабрь
+	return "Декабрь"
 }
