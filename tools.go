@@ -7,6 +7,7 @@ import (
 	"log"
 	"math"
 	"os/exec"
+	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -316,4 +317,20 @@ func GetMonthName(m int) string {
 
 	// 0 тоже декабрь
 	return "Декабрь"
+}
+
+// ArrToInterface - приведение любого среза к типу интерфейс
+func ArrToInterface(a interface{}) []interface{} {
+	s := reflect.ValueOf(a)
+	if s.Kind() != reflect.Slice {
+		return []interface{}{a}
+	}
+
+	ret := make([]interface{}, s.Len())
+
+	for i := 0; i < s.Len(); i++ {
+		ret[i] = s.Index(i).Interface()
+	}
+
+	return ret
 }
