@@ -317,8 +317,3 @@ func GetMonthName(m int) string {
 	// 0 тоже декабрь
 	return "Декабрь"
 }
-
-// ArrToInterface - приведение любого среза к типу интерфейс
-func ArrToInterface(a []interface{}) []interface{} {
-	return a
-}
