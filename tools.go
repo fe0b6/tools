@@ -340,6 +340,7 @@ func IsClosedChan(c chan struct{}) (ok bool) {
 	select {
 	case <-c:
 		ok = true
+	default:
 	}
 
 	return
