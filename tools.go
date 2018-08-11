@@ -334,3 +334,13 @@ func ArrToInterface(a interface{}) []interface{} {
 
 	return ret
 }
+
+// IsClosedChan - Проверяем закрыт ли канал или нет
+func IsClosedChan(c chan struct{}) (ok bool) {
+	select {
+	case <-c:
+		ok = true
+	}
+
+	return
+}
