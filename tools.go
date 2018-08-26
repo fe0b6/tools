@@ -16,6 +16,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var (
@@ -394,4 +395,37 @@ func AESDecrypt(key, cipherData []byte) (data []byte, err error) {
 
 	data = cipherData
 	return
+}
+
+// WaitTo - функция ожидания конкретного времени
+func WaitTo(t map[string]int) {
+	tn := time.Now()
+
+	var nt time.Time
+	s, m, h := t["s"], t["m"], t["h"]
+
+	if _, ok := t["h"]; ok { // Если указаны часы
+		nt = tn.Truncate(time.Hour).Add(time.Duration(m)*time.Minute + time.Duration(s)*time.Second)
+
+		if tn.Hour() >= h {
+			nt = nt.AddDate(0, 0, 1).Add(time.Duration(h-tn.Hour()) * time.Hour)
+		} else {
+			nt = nt.Add(time.Duration(h-tn.Hour()) * time.Hour)
+		}
+
+	} else if _, ok := t["m"]; ok { // Если указаны минуты
+		nt = tn.Truncate(time.Hour).Add(time.Duration(m)*time.Minute + time.Duration(s)*time.Second)
+
+		if tn.Minute() >= m {
+			nt = nt.Add(time.Hour)
+		}
+	} else if _, ok := t["s"]; ok { // Только секунды
+		nt = tn.Truncate(time.Minute).Add(time.Duration(s) * time.Second)
+
+		if tn.Second() >= s {
+			nt = nt.Add(time.Minute)
+		}
+	}
+
+	time.Sleep(nt.Sub(time.Now()))
 }
