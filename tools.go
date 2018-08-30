@@ -484,3 +484,18 @@ func isNil(v reflect.Value) bool {
 		return v.IsNil()
 	}
 }
+
+// InterfaceToMapStrInt - преобразуем интерфейс в map[string]int
+func InterfaceToMapStrInt(i interface{}) (h map[string]int) {
+	h = map[string]int{}
+
+	if th, ok := i.(map[string]interface{}); ok {
+		for k, v := range th {
+			if vint, ok := v.(float64); ok {
+				h[k] = int(vint)
+			}
+		}
+	}
+
+	return
+}
