@@ -467,7 +467,7 @@ func WaitTo(t map[string]int) {
 	if _, ok := t["h"]; ok { // Если указаны часы
 		nt = tn.Truncate(time.Hour).Add(time.Duration(m)*time.Minute + time.Duration(s)*time.Second)
 
-		if tn.Hour() >= h {
+		if tn.Hour() > h {
 			nt = nt.AddDate(0, 0, 1).Add(time.Duration(h-tn.Hour()) * time.Hour)
 		} else {
 			nt = nt.Add(time.Duration(h-tn.Hour()) * time.Hour)
