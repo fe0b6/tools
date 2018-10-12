@@ -87,6 +87,36 @@ func ChunkSliceInt(arr []int, size int) (ans [][]int) {
 	return
 }
 
+// ChunkSliceInterface - Разбиваем массив interface{} на несколько
+func ChunkSliceInterface(arr []interface{}, size int) (ans [][]interface{}) {
+	msize := len(arr) / size
+	if len(arr)%size != 0 {
+		msize++
+	}
+	ans = make([][]interface{}, msize)
+
+	l := len(arr)
+	now := 0
+	i := 0
+	for {
+		next := now + size
+
+		if now+size > l {
+			next = l
+		}
+
+		ans[i] = arr[now:next]
+		i++
+
+		if next == l {
+			break
+		}
+		now = next
+	}
+
+	return
+}
+
 // ChunkSliceMapStrInt - Разбиваем массив map[string]int на несколько
 func ChunkSliceMapStrInt(arr []map[string]int, size int) (ans [][]map[string]int) {
 	msize := len(arr) / size
