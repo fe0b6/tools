@@ -5,6 +5,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"crypto/sha256"
 	"encoding/gob"
 	"encoding/json"
 	"errors"
@@ -17,6 +18,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 var (
@@ -587,5 +590,34 @@ func InterfaceToMapStrInt(i interface{}) (h map[string]int) {
 		}
 	}
 
+	return
+}
+
+// Получаем хэш пароля
+func getPwdHash(pwd string) []byte {
+	hasher := sha256.New()
+	hasher.Write([]byte(pwd))
+
+	return hasher.Sum(nil)
+}
+
+// CryptPassword - Шифруем пароль
+func CryptPassword(pwd string) (crypt []byte, err error) {
+
+	crypt, err = bcrypt.GenerateFromPassword(getPwdHash(pwd), bcrypt.DefaultCost)
+	if err != nil {
+		log.Println("[error]", err)
+		return
+	}
+
+	return
+}
+
+// CheckPassword - Проверяем пароль
+func CheckPassword(pwd string, verf []byte) (ok bool) {
+	err := bcrypt.CompareHashAndPassword(verf, getPwdHash(pwd))
+	if err == nil {
+		ok = true
+	}
 	return
 }
