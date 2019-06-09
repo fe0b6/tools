@@ -228,6 +228,15 @@ func GetPlaceholders(l int) string {
 	return strings.TrimRight(strings.Repeat("?,", l), ",")
 }
 
+// GetPlaceholdersType - Возвращает строку placeholders нужной длины  типа
+func GetPlaceholdersType(l int, t string) string {
+	arr := make([]string, l)
+	for i := 0; i < l; i++ {
+		arr[i] = "?:::" + t
+	}
+	return strings.Join(arr, ",")
+}
+
 // AppendSet - добавляем элемент в массив
 func AppendSet(m []string, s string) []string {
 
