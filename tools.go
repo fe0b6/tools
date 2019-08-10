@@ -456,8 +456,8 @@ func IsClosedChan(c chan struct{}) (ok bool) {
 
 // AESEncrypt - Шифруем данные с помощью AES
 func AESEncrypt(key, d []byte) (cipherData []byte, err error) {
-	data := make([]byte, len(d))
-	copy(data, d)
+//	data := make([]byte, len(d))
+//	copy(data, d)
 
 	block, err := aes.NewCipher(key)
 	if err != nil {
@@ -478,7 +478,7 @@ func AESEncrypt(key, d []byte) (cipherData []byte, err error) {
 }
 
 // AESDecrypt - Расшифровываем данные с помощью AES
-func AESDecrypt(key, cipherData []byte) (data []byte, err error) {
+func AESDecrypt(key, cd []byte) (data []byte, err error) {
 	cipherData := make([]byte, len(cd))
 	copy(cipherData, cd)
 
