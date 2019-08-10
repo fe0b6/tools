@@ -475,7 +475,10 @@ func AESEncrypt(key, data []byte) (cipherData []byte, err error) {
 }
 
 // AESDecrypt - Расшифровываем данные с помощью AES
-func AESDecrypt(key, cipherData []byte) (data []byte, err error) {
+func AESDecrypt(key, cd []byte) (data []byte, err error) {
+	cipherData := make([]byte, len(cd))
+	copy(cipherData, cd)
+
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return
